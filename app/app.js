@@ -36,6 +36,10 @@ angular.module('myApp', [
 
             $rootScope.$on('$locationChangeStart', function (event, next, current) {
                 // redirect to login page if not logged in
+                if ($location.path() == '/login' && $rootScope.globals.currentUser) {
+                    console.log('already login, go to home');
+                    $location.path('/');
+                }
                 if ($location.path() !== '/login' && !$rootScope.globals.currentUser) {
                     $location.path('/login');
                 }
